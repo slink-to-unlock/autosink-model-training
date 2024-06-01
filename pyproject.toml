@@ -17,7 +17,8 @@ requires-python = ">=3.8"
 dependencies = [
     "PyYAML",
     "datasets",
-    "wandb"
+    "wandb",
+    "transformers",
 ]
 
 [project.optional-dependencies]
