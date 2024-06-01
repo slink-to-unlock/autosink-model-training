@@ -1,5 +1,5 @@
 from transformers import AutoFeatureExtractor
-from dataset import load_custom_dataset
+from autosink_model_training.dataset import load_custom_dataset
 from torchvision.transforms import Compose, Resize, Normalize, ToTensor, RandomHorizontalFlip, ColorJitter, RandomApply, RandomVerticalFlip
 
 # Function to preprocess and augment images
