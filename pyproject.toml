@@ -16,6 +16,8 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "PyYAML",
+    "datasets",
+    "wandb"
 ]
 
 [project.optional-dependencies]
