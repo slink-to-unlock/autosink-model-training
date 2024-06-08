@@ -18,7 +18,6 @@ dependencies = [
     "PyYAML",
     "datasets",
     "wandb",
-    "transformers",
     "evaluate",
     "accelerate",
 ]
