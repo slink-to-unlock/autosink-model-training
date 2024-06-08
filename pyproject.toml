@@ -20,6 +20,7 @@ dependencies = [
     "wandb",
     "transformers",
     "evaluate",
+    "accelerate",
 ]
 
 [project.optional-dependencies]
