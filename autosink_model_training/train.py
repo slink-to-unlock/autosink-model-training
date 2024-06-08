@@ -54,7 +54,7 @@ class AIsinkTrainer:
             args=self.training_args,
             train_dataset=self.train_dataset,
             eval_dataset=self.eval_dataset,
-            compute_metrics=self.get_compute_metrics_fn('accuracy'),
+            compute_metrics=get_compute_metrics_fn('accuracy'),
             # callbacks=[MyWandbCallback()]  # W&B 콜백 추가
         )
 
