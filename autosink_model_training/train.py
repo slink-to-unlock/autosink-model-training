@@ -5,16 +5,6 @@ from transformers import Trainer, TrainingArguments, default_data_collator, Trai
 import evaluate
 
 
-def get_compute_metrics_fn(metric: str):
-    __metric = evaluate.load(metric)
-
-    def compute_metrics_fn(p):
-        return __metric.compute(
-            predictions=np.argmax(p.predictions, axis=1),
-            references=p.label_ids
-        )
-
-    return compute_metrics_fn
 
 
 class AIsinkTrainer:
@@ -30,7 +20,16 @@ class AIsinkTrainer:
         os.environ["WANDB_PROJECT"] = "AIsink-resent50"
         os.environ["WANDB_LOG_MODEL"] = "checkpoint"
 
+    def get_compute_metrics_fn(self, metric: str):
+        __metric = evaluate.load(metric)
 
+        def compute_metrics_fn(p):
+            return __metric.compute(
+                predictions=np.argmax(p.predictions, axis=1),
+                references=p.label_ids
+            )
+
+        return compute_metrics_fn
 
     def get_training_arguments(self):
         return TrainingArguments(
@@ -54,7 +53,7 @@ class AIsinkTrainer:
             args=self.training_args,
             train_dataset=self.train_dataset,
             eval_dataset=self.eval_dataset,
-            compute_metrics=get_compute_metrics_fn('accuracy'),
+            compute_metrics=self.get_compute_metrics_fn('accuracy'),
             # callbacks=[MyWandbCallback()]  # W&B 콜백 추가
         )
 
