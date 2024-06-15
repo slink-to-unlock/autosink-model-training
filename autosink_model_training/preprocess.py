@@ -38,13 +38,11 @@ def split_dataset(dataset):
 
 
 if __name__ == '__main__':
-    import os
-
     # ResNet model load
     feature_extractor = AutoFeatureExtractor.from_pretrained('microsoft/resnet-50')
 
     # Ensure that PATH_DATASET_DIR environment variable is set
-    path_dataset_dir = os.getenv('data_dir')
+    path_dataset_dir = 'path_to_dataset'
     if path_dataset_dir is None:
         raise ValueError("Environment variable PATH_DATASET_DIR is not set")
 
