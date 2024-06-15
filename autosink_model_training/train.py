@@ -17,7 +17,7 @@ class AIsinkTrainer:
         self.trainer = self.get_trainer()
 
     def setup_environment(self):
-        os.environ["WANDB_PROJECT"] = "AIsink-resent50"
+        os.environ["WANDB_PROJECT"] = "AIsink-resnet50"
         os.environ["WANDB_LOG_MODEL"] = "checkpoint"
 
     def get_compute_metrics_fn(self, metric: str):
@@ -34,16 +34,18 @@ class AIsinkTrainer:
     def get_training_arguments(self):
         return TrainingArguments(
             output_dir='./results',
-            num_train_epochs=3,
+            num_train_epochs=5,
             per_device_train_batch_size=8,
             per_device_eval_batch_size=8,
             eval_strategy="epoch",
+            fp16=True,
+            learning_rate=2e-4,
             logging_dir='./logs',
             logging_steps=10,
             report_to="wandb",  # W&B에 로깅
             run_name='ai-sink-run',
             save_strategy="epoch",  # 매 epoch마다 모델 저장
-            save_total_limit=5,  # 최대 5개의 체크포인트 저장
+            save_total_limit=2,  # 최대 5개의 체크포인트 저장
             load_best_model_at_end=True,
         )
 
