@@ -24,7 +24,7 @@ def data_preprocess(dataset, feature_extractor):
 
     return preprocessed_dataset
 
-def data_preprocess_eval(dataset, feature_extractor):
+def data_preprocess_eval(dataset, feature_extractor, label):
     pretrained_size = feature_extractor.size['shortest_edge']
     normalize = Normalize(mean=feature_extractor.image_mean, std=feature_extractor.image_std)
     transform = Compose([
@@ -35,8 +35,11 @@ def data_preprocess_eval(dataset, feature_extractor):
     preprocessed_dataset = dataset.map(lambda example: preprocess_images(example, transform), batched=False)
     preprocessed_dataset = preprocessed_dataset.remove_columns('image')
 
-    return preprocessed_dataset['train']
+   # 'labels' 열 추가
+    preprocessed_dataset = preprocessed_dataset.map(lambda example: {**example, 'labels': 0}, batched=False)
 
+
+    return preprocessed_dataset['train']
 
 def split_dataset(dataset):
     """
