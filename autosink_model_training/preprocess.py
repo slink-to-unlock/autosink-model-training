@@ -36,7 +36,7 @@ def data_preprocess_eval(dataset, feature_extractor, label):
     preprocessed_dataset = preprocessed_dataset.remove_columns('image')
 
    # 'labels' 열 추가
-    preprocessed_dataset = preprocessed_dataset.map(lambda example: {**example, 'labels': 0}, batched=False)
+    preprocessed_dataset = preprocessed_dataset.map(lambda example: {**example, 'labels': label}, batched=False)
 
 
     return preprocessed_dataset['train']
